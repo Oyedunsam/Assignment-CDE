@@ -1,0 +1,121 @@
+
+user@DESKTOP-AUJJLJE MINGW64 ~
+$ pwd
+/c/Users/user
+
+user@DESKTOP-AUJJLJE MINGW64 ~
+$ cd ~Desktop
+bash: cd: ~Desktop: No such file or directory
+
+user@DESKTOP-AUJJLJE MINGW64 ~
+$ ^[[200~mkdir ~/Desktop/raw
+bash: $'\E[200~mkdir': command not found
+
+user@DESKTOP-AUJJLJE MINGW64 ~
+$ mkdir ~/Desktop/raw
+
+user@DESKTOP-AUJJLJE MINGW64 ~
+$ ls ~/Desktop
+'3D Objects - Shortcut.lnk'*    'Birthday Pictures'/  'DAta E;ite'/                   'Google Sheets.lnk'*         'NIIT TEACH'/           'Power Bi'/             'Schlumberger Energy consumption.xlsx'   _chat.txt                            µTorrent.lnk*
+'9ja debt analysis.xlsx'        'Blender 4.1.lnk'*     DS-Capstone-Presentation.pptx  'Google Slides.lnk'*         'New Folder'/           'Power Pivot'/           Seun.Rmd                                desktop.ini
+'ADEDOKUN SARAH JOY CV-1.docx'   Books/               "ELLA's SET DA"/                 Google+Sheet+Exercise.xlsx  'New Project.mp4'       'Project defence'/      'Slumb data.xlsx'                        ds-capstone-template-coursera.pptx
+'ADEDOKUN SARAH JOY CV.docx'     CDE_Learning/         GitHub.lnk*                    'Latest CV'/                 'POWER BI LEARNING'/     Python/                 Subomi/                                'newmarket_prospects - .CSV.txt'
+'ADEDOKUN SARAH JOY CV.pdf'      CapCut.lnk*          'Google Analytics'/              MIS/                        'Pastor Eniowo.mp4'      SKILLS/                'TMC AFRICA DAY.mp4'                    'newmarket_prospects .CSV'
+"Adeolu's DA SET"/              'DA Slides'/          'Google Docs.lnk'*              'Microsoft Lists.lnk'*        Play/                  'SQL DATA'/             "Tolu's DA SET"/                         newmarket_prospects.txt
+'Assesment Prepearartion'/      'DATA ANALYSIS'/      'Google Drive.lnk'*             'My_Possible Solution.xlsx'  'Power BI Helper.lnk'*  'Samuel - Chrome.lnk'*  'VSDC Free Video Editor.lnk'*            raw/
+
+user@DESKTOP-AUJJLJE MINGW64 ~
+$ cd ~/Desktop/raw
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ pws
+bash: pws: command not found
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ pwd
+/c/Users/user/Desktop/raw
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ curl -o annual-enterprise-survey-2023-financial-year-provisional.csv https://www.stats.govt.nz/assets/Uploads/Annual-enterprise-survey/Annual-enterprise-survey-2023-financial-year-provisional/Download-data/annual-enterprise-survey-2023-financial-year-provisional.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 7876k  100 7876k    0     0   111k      0  0:01:10  0:01:10 --:--:--  204k
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ ls -/Desktop/raq
+ls: unknown option -- /
+Try 'ls --help' for more information.
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ ls ~/Desktop/raw
+annual-enterprise-survey-2023-financial-year-provisional.csv
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ ^C
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ awk -F, 'NR==1{gsub(/Variable_code/, "variable_code");}1' annual-enterprise-survey-2023-financial-year-provisional.csv > temp.csv && mv temp.csv annual-enterprise-survey-2023-financial-year-provisional.csv
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ RAW_DIR=~/Desktop/raw
+TRANSFORMED_DIR=~/Desktop/Transformed
+RAW_FILE="$RAW_DIR/annual-enterprise-survey-2023-financial-year-provisional.csv"
+TRANSFORMED_FILE="$TRANSFORMED_DIR/2023_year_finance.csv"
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ if [ ! -d "$TRANSFORMED_DIR" ]; then
+    mkdir -p "$TRANSFORMED_DIR"
+fi
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ # Step 3: Rename the column 'Variable_code' to 'variable_code' and select specific columns
+awk -F, '
+BEGIN {
+    OFS = ",";
+}
+NR==1 {
+    for (i=1; i<=NF; i++) {
+        if ($i == "Variable_code") $i = "variable_code";
+        col_name[$i] = i;
+    }
+    print "year", "Value", "Units", "variable_code";
+}
+NR>1 {
+    print $col_name["year"], $col_name["Value"], $col_name["Units"], $col_name["variable_code"];
+}
+' "$RAW_FILE" > "$TRANSFORMED_FILE"
+
+# Step 4: Verify the transformed file was created
+if [ -f "$TRANSFORMED_FILE" ]; then
+    echo "Transformation successful. File saved as $TRANSFORMED_FILE"
+else
+    echo "Error: Transformation failed."
+fi
+Transformation successful. File saved as /c/Users/user/Desktop/Transformed/2023_year_finance.csv
+
+
+user@DESKTOP-AUJJLJE MINGW64 ~/Desktop/raw
+$ mkdir ~/Desktop/Transformed/Gold
+
+
+
+Question 2
+crontab -e
+0 0 * * * /path/to/your/script.sh
+crontab -l
+
+Question 3
+# Define source and destination directories
+SOURCE_DIR="/path/to/source_folder"
+DEST_DIR="/path/to/json_and_CSV"
+
+# Create destination directory if it doesn't exist
+mkdir -p "$DEST_DIR"
+
+# Move CSV and JSON files from source to destination
+mv "$SOURCE_DIR"/*.csv "$DEST_DIR" 2>/dev/null
+mv "$SOURCE_DIR"/*.json "$DEST_DIR" 2>/dev/null
+
+echo "Files have been moved successfully."
+mkdir: cannot create directory ‘/path’: Permission denied
+Files have been moved successfully.
