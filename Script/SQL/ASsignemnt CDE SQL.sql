@@ -18,7 +18,8 @@ where standard_qty =0 and (orders.gloss_qty > 1000 or orders.poster_qty > 1000)
 Select *
 from accounts
 where (name like 'W%' or name like 'C%') and 
-(primary_poc like '%ana' or primary_poc like '%Ana' or primary_poc not like '%eana') 
+(primary_poc like '%ana%' or primary_poc like '%Ana%') and
+(primary_poc not like '%eana%') 
 
 --Provide a table that shows the region for each sales rep aling with their
 --Associated accounts. Final table should include 3 columns region name, Sales rep name
